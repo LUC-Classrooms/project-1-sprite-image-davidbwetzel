@@ -8,46 +8,71 @@
 // Global Variables go here
 var a = 0; // rotation angle
 var x = 0, y = 0; // sprite position
+var xSpeed = 0, ySpeed = 0;
 
 
 function setup(){
   // this function will run once
-  createCanvas(400, 300); // create a 600x400 pixel drawing canvas
+  createCanvas(300, 200); // create a 600x400 pixel drawing canvas
   x = width/2;
   y = height/2;
+  xSpeed = random(-3, 3);
+  ySpeed = random(-3, 3);
 }
 
 function draw(){
   // this function runs again and again (60x per second)
-  background(255); //light gray background
+  background(155, 100, 150); //purple-ish background
+
+  x += xSpeed;
+  y += ySpeed;
+
+  if(x > width || x < 0){
+    xSpeed *= -1; 
+  }
+
+  if(y > height || y < 0){
+    ySpeed = ySpeed - (ySpeed * 2); 
+  }
+  a += -0.02;
+
+  text("Anyone can draw!", 20, 20);
+
+  push();
+  translate(x, y);
+  rotate(a);
+  /** Draw a Cat */
   fill(200)
   noStroke();
-  triangle(x - 45, y - 55, x - 25, y - 40, x - 45, y - 20);
-  triangle(x + 45, y - 55, x + 25, y - 40, x + 45, y - 20);
-  ellipse(x, y, 100); // head
+  triangle(0 - 45, 0 - 55, 0 - 25, 0 - 40, 0 - 45, 0 - 20);
+  triangle(0 + 45, 0 - 55, 0 + 25, 0 - 40, 0 + 45, 0 - 20);
+  ellipse(0, 0, 100); // head
   fill("yellow");
-  ellipse(x - 20, y - 10, 10); // left eye
-  ellipse(x + 20, y - 10, 10); // right eye
+  ellipse(0 - 20, 0 - 10, 10); // left eye
+  ellipse(0 + 20, 0 - 10, 10); // right eye
   fill("pink");
-  triangle(x - 5, y, x + 5, y, x, y + 8); // nose
+  triangle(0 - 5, 0, 0 + 5, 0, 0, 0 + 8); // nose
   stroke(255);
   strokeWeight(2);
-  line(x - 10, y + 5, x - 30, y); // left top whisker
+  line(0 - 10, 0 + 5, 0 - 30, 0); // left top whisker
   //stroke("red");
-  line(x + 10, y + 5, x + 30, y); // right top whisker
+  line(0 + 10, 0 + 5, 0 + 30, 0); // right top whisker
   //stroke("blue");
-  line(x - 10, y + 5, x - 35, y + 5); // left middle whisker
+  line(0 - 10, 0 + 5, 0 - 35, 0 + 5); // left middle whisker
   //stroke("green");
-  line(x + 10, y + 5, x + 35, y + 5); // right middle whisker
+  line(0 + 10, 0 + 5, 0 + 35, 0 + 5); // right middle whisker
   //stroke("pink");
-  line(x - 10, y + 5, x - 30, y + 10); // left middle whisker
+  line(0 - 10, 0 + 5, 0 - 30, 0 + 10); // left middle whisker
   //stroke("yellow");
-  line(x + 10, y + 5, x + 30, y + 10); // right middle whisker
+  line(0 + 10, 0 + 5, 0 + 30, 0 + 10); // right middle whisker
   noFill();
   stroke("purple")
-  arc(x - 10, y + 12, 20, 20, 0, PI); // mouth left
-  arc(x + 10, y + 12, 20, 20, 0, PI); // mouth right
-
+  arc(0 - 10, 0 + 12, 20, 20, 0, PI); // mouth left
+  arc(0 + 10, 0 + 12, 20, 20, 0, PI); // mouth right
+  noStroke();
+  fill(0);
+  text("Cat", -10, 40);
+  pop(); // dispose of the cat layer
 
 /* 
   Use the following if()...else() structure to incorporate mouse click control of your animation
